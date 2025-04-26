@@ -1,0 +1,53 @@
+create table address(
+id number primary key,
+street varchar(50)
+);
+create table city(
+id number primary key,
+name varchar(50)
+);
+create table actor(
+id number primary key,
+name varchar(50),
+address_id number,
+city_id  number,
+constraint address_fk foreign key (address_id) references address(id),
+constraint city_fk foreign key (city_id) references city(id)
+);
+create table movie(
+id number primary key,
+name varchar(50)
+);
+create table actor_movie(
+actor_id number,
+movie_id number,
+constraint actor_fk foreign key (actor_id) references actor(id),
+constraint movie_fk foreign key (movie_id) references movie(id)
+);
+
+insert into city values(1 , 'cairo');
+insert into city values(2 , 'giza');
+
+insert into address values(1,'address a');
+insert into address values(2,'address b');
+insert into address values(3,'address c');
+insert into address values(4,'address d');
+
+insert into actor values(11 , 'actor 1' , 1 , 1);
+insert into actor values(22 , 'actor 2' , 2 , 2);
+insert into actor values(33 , 'actor 3' , 3 , 1);
+insert into actor values(44 , 'actor 4' , 4 , 2);
+
+insert into movie values(111 , 'movie 1');
+insert into movie values(222 , 'movie 2');
+insert into movie values(333 , 'movie 3');
+insert into movie values(444 , 'movie 4');
+
+insert into actor_movie values(11 , 111);
+insert into actor_movie values(22 , 222);
+insert into actor_movie values(22 , 111);
+insert into actor_movie values(33 , 333);
+insert into actor_movie values(33 , 444);
+insert into actor_movie values(44 , 444);
+commit;
+select * from actor_movie;
