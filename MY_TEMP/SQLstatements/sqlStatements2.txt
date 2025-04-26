@@ -1,0 +1,55 @@
+create table courses (
+    id int PRIMARY KEY ,
+    name VARCHAR2(255)
+);
+
+create table STUDENTS_COURSES(
+    student_id int ,
+    course_id int,
+    CONSTRAINT pk PRIMARY KEY(student_id , course_id) ,
+    FOREIGN KEY (student_id) REFERENCES STUDENTS(id),
+    FOREIGN KEY (course_id) REFERENCES COURSES(id)
+);
+create table Departments2 (
+    id int PRIMARY KEY,
+    name VARCHAR2(255)
+);
+
+
+COMMIT;
+
+create table students (
+    id number PRIMARY KEY ,
+    name VARCHAR2(255) ,
+    ADDRESS VARCHAR2(255) ,
+    age number CHECK(age > 0) ,
+    joined_date date default sysdate ,
+    dep_id NUMBER ,
+    FOREIGN KEY (dep_id) REFERENCES Departments2(id)
+);
+
+
+INSERT into DEPARTMENTS2 VALUES (1,'CS');
+INSERT into DEPARTMENTS2 VALUES (2,'3Secondary');
+
+INSERT into STUDENTS(id , name , ADDRESS , age) VALUES (1,'yousef' , 'youtubia' , 20);
+INSERT into STUDENTS(id , name , ADDRESS , age) VALUES (2,'Hazem' , 'embaba' , 21);
+
+INSERT INTO COURSES(id , name) VALUES (1 , 'BackEnd');
+INSERT INTO COURSES(id , name) VALUES (2 , 'Ra7a el-bal');
+
+COMMIT;
+create SEQUENCE Departments2_seq
+start with 1
+increment by 1
+NOCYCLE
+NOCACHE;
+
+INSERT into STUDENTS(id , name , ADDRESS , age , JOINED_DATE , DEP_ID) VALUES (3,'Hazem' , 'embaba' , 21 ,sysdate , 1);
+
+SELECT SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') FROM dual;
+select * from students_courses;
+select * from students;
+
+
+
